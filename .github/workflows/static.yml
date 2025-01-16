@@ -42,7 +42,7 @@ jobs:
 
       - name: Convert Jupyter Notebook to HTML
         run: |
-          jupyter nbconvert --to html --output-dir=html notebooks/*.ipynb
+          jupyter nbconvert --to html --output-dir=html *.ipynb
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
