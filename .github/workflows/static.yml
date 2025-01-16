@@ -43,7 +43,20 @@ jobs:
       - name: Convert Jupyter Notebook to HTML
         run: |
           jupyter nbconvert --to html --output-dir=html *.ipynb
-
+      
+      - name: Generate index.html
+        run: |
+          echo '<!DOCTYPE html>' > html/index.html
+          echo '<html><head><title>Notebook Index</title></head><body>' >> html/index.html
+          echo '<h1>Notebook Index</h1>' >> html/index.html
+          for file in html/*.html; do
+            filename=$(basename "$file")
+            if [ "$filename" != "index.html" ]; then
+              echo "<p><a href='$filename'>$filename</a></p>" >> html/index.html
+            fi
+          done
+          echo '</body></html>' >> html/index.html
+  
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
